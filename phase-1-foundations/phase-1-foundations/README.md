@@ -1,7 +1,7 @@
 markdown
 # Phase 1: Foundations
 
-Early scripts built while learning core Python — variables, input handling, and conditional logic — applied to real accounting calculations rather than generic exercises.
+Early scripts applying core Python — variables, input handling, and conditional logic — applied to real accounting calculations rather than generic exercises.
 
 ## Projects
 
