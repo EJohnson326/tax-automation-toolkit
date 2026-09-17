@@ -1,0 +1,22 @@
+# Straight-line depreciation toolkit using a function
+
+def calculate_depreciation(cost, salvage, life):
+    """Returns annual straight-line depreciation, or an error message if inputs are invalid."""
+    if life <= 0:
+        return "Useful life must be greater than zero."
+    if cost < 0 or salvage < 0:
+        return "Cost and salvage value cannot be negative."
+    if salvage > cost:
+        return "Salvage value cannot exceed asset cost."
+    return (cost - salvage) / life
+
+
+assets = [
+    {"name": "Office Printer", "cost": 1200, "salvage": 100, "life": 5},
+    {"name": "Delivery Van", "cost": 32000, "salvage": 6000, "life": 8},
+    {"name": "Laptop", "cost": 1800, "salvage": 0, "life": 3},
+]
+
+for asset in assets:
+    result = calculate_depreciation(asset["cost"], asset["salvage"], asset["life"])
+    print(asset["name"], "->", result)
