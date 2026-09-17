@@ -1,4 +1,5 @@
-# Straight-line depreciation toolkit using a function
+# Straight-line depreciation toolkit
+# Accepts multiple assets interactively, validates each one, and handles bad input gracefully.
 
 def calculate_depreciation(cost, salvage, life):
     """Returns annual straight-line depreciation, or an error message if inputs are invalid."""
@@ -11,12 +12,31 @@ def calculate_depreciation(cost, salvage, life):
     return (cost - salvage) / life
 
 
-assets = [
-    {"name": "Office Printer", "cost": 1200, "salvage": 100, "life": 5},
-    {"name": "Delivery Van", "cost": 32000, "salvage": 6000, "life": 8},
-    {"name": "Laptop", "cost": 1800, "salvage": 0, "life": 3},
-]
+def get_asset_input():
+    """Prompts for one asset's details. Returns a dict, or None if the user is done."""
+    name = input("\nAsset name (or press Enter to finish): ")
+    if name == "":
+        return None
 
+    try:
+        cost = float(input("  Asset cost: "))
+        salvage = float(input("  Salvage value: "))
+        life = float(input("  Useful life (years): "))
+    except ValueError:
+        print("  That's not a valid number. Skipping this asset.")
+        return get_asset_input()
+
+    return {"name": name, "cost": cost, "salvage": salvage, "life": life}
+
+
+assets = []
+while True:
+    asset = get_asset_input()
+    if asset is None:
+        break
+    assets.append(asset)
+
+print("\n--- Depreciation Results ---")
 for asset in assets:
     result = calculate_depreciation(asset["cost"], asset["salvage"], asset["life"])
     print(asset["name"], "->", result)
