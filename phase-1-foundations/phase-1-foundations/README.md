@@ -1,21 +1,7 @@
-markdown
-# Phase 1: Foundations
+def calculate_depreciation(cost, salvage, life): — this defines a function: a named, reusable block of code. cost, salvage, life are parameters — placeholders for whatever values get passed in when the function is called.
+The """...""" line — a docstring, a description of what the function does. Good practice, and something reviewers (or future-you) appreciate.
+return — instead of print-ing inside the function, it returns a value back to whoever called it. That's what lets the same function feed a result into a print statement, a report, a spreadsheet export — anywhere.
+calculate_depreciation(asset["cost"], asset["salvage"], asset["life"]) — this calls the function, passing in that asset's specific values. The loop calls it once per asset, so the formula and the validation logic exist in exactly one place instead of being copy-pasted.
 
-Early scripts applying core Python — variables, input handling, and conditional logic — applied to real accounting calculations rather than generic exercises.
+I also added a fourth test asset with bad data (salvage > cost) to confirm the validation logic — which used to only live in your single-asset script — now works inside the batch/loop version too. It correctly flagged it instead of crashing or producing nonsense.
 
-## Projects
-
-### depreciation_calculator.py
-A straight-line depreciation calculator that prompts for asset cost, salvage value, and useful life, then returns annual depreciation.
-
-**What it does:**
-- Calculates annual depreciation using the straight-line method: `(Cost − Salvage Value) / Useful Life`
-- Validates input before calculating — rejects a useful life of zero (which would otherwise crash the program), negative cost/salvage values, and a salvage value that exceeds the asset cost
-- Built to be run interactively from the command line
-
-**Why it matters:** most "calculator" scripts online assume clean input. This one handles the bad data a real user might enter, which is the difference between a demo and a tool someone could actually use.
-
-**Run it:**
-​```
-python3 depreciation_calculator.py
-​```
